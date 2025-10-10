@@ -51,8 +51,8 @@ for name, value in filtered_attrs.items():
     # Safely convert value type
     if isinstance(value, bool):
         nominal_value = ifc_file.create_entity("IfcBoolean", value)
-    elif isinstance(value, (int, float)):
-        nominal_value = ifc_file.create_entity("IfcReal", float(value))
+    #elif isinstance(value, (int, float)):
+        #nominal_value = ifc_file.create_entity("IfcReal", float(value))
     else:
         nominal_value = ifc_file.create_entity("IfcText", str(value))
     
