@@ -7,7 +7,6 @@ import bonsai.tool as tool
 
 # Make sure you put the right path where your files are stored
 json_path = "OID_2.json"
-out_path = "output2.ifc"
 pset_name = "SBI_Custom"
 
 # === Get current IFC file loaded via Bonsai ===
@@ -83,6 +82,10 @@ ifc_file.create_entity(
 
 print(f"Added custom Pset '{pset_name}' with {len(filtered_attrs)} properties to {ifc_entity.GlobalId}")
 
-# === Optionally save a copy ===
-ifc_file.write(out_path)
-print(f"Saved modified IFC file: {out_path}")
+# ===  Let Bonsai know the file changed & refresh UI ===
+ifc_file = IfcStore.file
+
+# Light UI nudge so panels update; if there’s no mesh, open the IFC Project Browser to view the entity.
+for area in bpy.context.screen.areas:
+    if area.type in {"PROPERTIES", "OUTLINER", "VIEW_3D"}:
+        area.tag_redraw()
